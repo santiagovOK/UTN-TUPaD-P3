@@ -1,6 +1,14 @@
 # Trabajo Práctico - Unidad 1 (HTML) - Creación de un Food Store básico
 
+✨ Estudiante
+
+- Nombre: Varela, Santiago Octavio
+- Comisión: M25 C3-13
+- Email institucional: santiago.varela@tupad.utn.edu.ar
+
 Repositorio donde podrńa encontrar mis trabajos de Programación III: https://github.com/santiagovOK/UTN-TUPaD-P3
+
+---
 
 Este proyecto consiste en un sitio web HTML estatico.
 

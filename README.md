@@ -7,7 +7,7 @@ Tecnicatura Universitaria en Programación a distancia
 ✨ Estudiante
 
 - Nombre: Varela, Santiago Octavio
-- Comisión: 
+- Comisión: M25 C3-13
 - Email institucional: santiago.varela@tupad.utn.edu.ar
 
 📂 Descripción del Repositorio
