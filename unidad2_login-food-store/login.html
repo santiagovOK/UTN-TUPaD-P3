@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Food Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="login">
+        <section class="login__card" aria-labelledby="login-title">
+            <header class="login__header">
+                <h1 id="login-title" class="login__brand">Food Store</h1>
+                <p class="login__subtitle">Iniciar Sesion</p>
+            </header>
+
+            <form class="login__form" action="#" method="post">
+                <fieldset class="login__fields">
+                    <legend class="login__legend">Datos de acceso</legend>
+            
+                    <p class="login__field-group">
+                        <label class="login__label" for="email">Email</label>
+                        <input
+                            class="login__input login__input--email"
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="tuemail@ejemplo.com"
+                            required
+                        >
+                    </p>
+            
+                    <p class="login__field-group">
+                        <label class="login__label" for="password">Contraseña</label>
+                        <input
+                            class="login__input login__input--password"
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Ingresa tu contraseña"
+                            required
+                        >
+                    </p>
+                </fieldset>
+            
+                <footer class="login__actions">
+                    <button class="login__button login__button--primary" type="submit">Ingresar</button>
+                    <a class="login__signup-link" href="#">Registrate</a>
+                </footer>
+            </form>
+
+            <p class="login__signup-text">
+                ¿No tenés cuenta?<a class="login__signup-link" href="#">Registrate</a>
+            </p>
+        </section>
+    </main>
+</body>
+</html>
