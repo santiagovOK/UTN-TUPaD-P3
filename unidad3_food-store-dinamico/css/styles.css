@@ -140,6 +140,8 @@ button {
 	font-size: 1.4rem;
 	font-weight: 700;
 	cursor: pointer;
+	width: 50%;
+	align-self: center;
 }
 
 button:hover,
