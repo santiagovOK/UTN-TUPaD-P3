@@ -27,6 +27,8 @@ body {
 	padding: 2rem;
 }
 
+/* Aquí en realidad sería más elegante crear una clase (por ejemplo, .panel), pero como no solicitaron hacerlo (solo un par de IDs) lo dejé así */
+
 header,
 aside,
 main,
@@ -152,12 +154,12 @@ button:focus {
 
 #contenedor-productos {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: wrap; /* permite que las tarjetas se acomoden en varias filas si no 	caben en una sola */
 	gap: 1.6rem;
 }
 
 #contenedor-productos article {
-	flex: 1 1 240px;
+	flex: 1 1 240px; /* las tarjetas tendrán un ancho mínimo de 240px y crecerán / achicarán para llenar el espacio disponible */
 	border: 1px solid var(--color-borde);
 	border-radius: 0.8rem;
 	padding: 1.4rem;
@@ -192,24 +194,3 @@ footer p {
 	font-size: 1.3rem;
 	line-height: 1.5;
 }
-
-/* @media (min-width: 768px) {
-	main form {
-		flex-direction: row;
-		align-items: flex-end;
-		flex-wrap: wrap;
-	}
-
-	main form label {
-		margin-bottom: 0.8rem;
-		width: 100%;
-	}
-
-	main form input[type="text"] {
-		flex: 1;
-	}
-
-	main form button {
-		white-space: nowrap;
-	}
-} */
