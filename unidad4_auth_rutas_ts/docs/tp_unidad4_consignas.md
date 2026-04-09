@@ -60,3 +60,4 @@ Al finalizar, el alumno habrá logrado:
 | Protección | Las rutas de admin están totalmente bloqueadas para usuarios sin permiso. | La protección funciona pero se puede evadir recargando la página. | Cualquier usuario puede entrar a cualquier URL sin loguearse. |
 | TypeScript | Se utilizan interfaces y tipos específicos en todo el proyecto. | Uso excesivo de any o tipos mal definidos. | El código no aprovecha las ventajas de TypeScript. |
 | Entrega | Entrega<br><br>archivo .zip<br><br>correctamente comprimido y con estructura de carpetas<br><br>respetada. | Entrega archivo<br><br>.zip funcional pero con<br><br>detalles menores. | No entrega archivo<br><br>.zip, está corrupto, no respeta la<br><br>estructura solicitada o el proyecto no<br><br>ejecuta. |
+
