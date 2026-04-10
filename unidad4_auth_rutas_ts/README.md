@@ -1,6 +1,33 @@
-# Justificación del uso de Vite + TypeScript (configuracion minima)
+
+# Trabajo Práctico - Unidad 4 (TypeScript) - Food Store
+
+✨ Estudiante
+
+- Nombre: Varela, Santiago Octavio
+- Comisión: M25 C3-13
+- Email institucional: santiago.varela@tupad.utn.edu.ar
+
+Repositorio donde podrán encontrar mis trabajos de Programación III: https://github.com/santiagovOK/UTN-TUPaD-P3
+
+## Objetivo General
+
+Evolucionar la aplicación dinámica "Food Store" hacia un sistema con **Autenticación y Roles**. El alumno deberá implementar un flujo de seguridad que proteja el contenido según el tipo de usuario, sustituyendo la carga abierta de datos por un acceso restringido mediante TypeScript y localStorage.
+
+## Validaciones Manuales
+
+Pueden ver el paso a paso de las validaciones manuales que seguí para el cumplimiento de las consignas y los criterios evaluativos [aquí](/unidad4_auth_rutas_ts/docs/validacion_manual_tp_unidad4.md)
+
+## Uso de console.log para debugging
+
+Durante el desarrollo se utilizaron console.log para seguir el flujo de registro, login, guard de rutas y logout, con prefijos por contexto ([registro], [login], [guard]) para facilitar la lectura en consola.
+Estos logs se usaron solo como soporte de depuración y se evitó exponer datos sensibles.
+
+<details>
+<summary> Justificación del uso de Vite + TypeScript (configuracion minima) </summary>
 
 Este proyecto usa Vite para desarrollo y build del frontend.
+
+Nota personal: creo que hace falta aclarar esto porque no estuvo muy claro en los materiales teóricos su uso. Si bien es mencionado dentro del video explicativo para este trabajo y también dentro del repositorio base `https://github.com/chiro45/proteger_rutas`, no hubo mucha explicación sobre Vite en contenidos previos.
 
 ## Por que usar Vite aqui
 
@@ -57,7 +84,19 @@ Para evitar errores como "ECMAScript imports and exports cannot be written in a 
 2. Si no aparecen errores, la configuracion de modulos esta correcta.
 3. Levantar entorno con `pnpm dev`.
 
-## Refactor futuro posible (login y registro)
+</details>
+
+## Aplicacion de CSS en esta unidad
+
+Para esta entrega se creo `src/styles.css` como hoja global del proyecto.
+
+La configuracion base que originalmente estaba en `src/pages/auth/login/login.css` (archivo construido para la actividad de la unidad 2) se movio a ese archivo global para que quede disponible en todas las vistas.
+
+Con este criterio, los estilos generales se mantienen para todo el proyecto y cada `.html` particular puede sumar luego sus estilos especificos sin duplicar la base.
+
+Como en este trabajo practico no se exigia una implementacion de estilos puntual, la aplicacion de CSS se limito a esta organizacion general.
+
+## Refactorización futura que podría realizarse (login y registro)
 
 Como mejora de mantenibilidad, se puede simplificar la logica compartida entre `login.ts` y `registro.ts`.
 

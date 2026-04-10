@@ -3,7 +3,7 @@ import type { Rol } from "./types/Rol";
 import { getUSer } from "./utils/localStorage";
 import { navigate } from "./utils/navigate";
 
-// Rutas canonicas usadas por el guard para redireccionar.
+// Rutas usadas por el guard para redireccionar.
 const LOGIN_PATH = "/src/pages/auth/login/login.html";
 const ADMIN_HOME_PATH = "/src/pages/admin/home/home.html";
 const CLIENT_HOME_PATH = "/src/pages/client/home/home.html";
