@@ -11,7 +11,7 @@ Referencia:
 2. Ejecutar:
 
 ```bash
-cd /home/san/projects/UTN-TUPaD-P3/unidad4_auth_rutas_ts
+cd UTN-TUPaD-P3/unidad4_auth_rutas_ts
 pnpm dev
 ```
 
