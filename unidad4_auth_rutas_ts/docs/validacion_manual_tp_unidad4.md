@@ -174,7 +174,7 @@ localStorage.setItem("userData", JSON.stringify({
 ```
 
 2. Ir directo a /src/pages/client/home/home.html.
-3. Resultado esperado: comportamiento segun regla definida por la app (redireccion).
+3. Resultado esperado: comportamiento segun regla definida por la app (redireccion a admin).
 
 ### 5.4 userData invalido
 

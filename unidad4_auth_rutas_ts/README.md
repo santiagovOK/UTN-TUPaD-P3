@@ -13,9 +13,31 @@ Repositorio donde podrán encontrar mis trabajos de Programación III: https://g
 
 Evolucionar la aplicación dinámica "Food Store" hacia un sistema con **Autenticación y Roles**. El alumno deberá implementar un flujo de seguridad que proteja el contenido según el tipo de usuario, sustituyendo la carga abierta de datos por un acceso restringido mediante TypeScript y localStorage.
 
+## Instalación de dependencias
+
+Requisitos previos:
+
+- Node.js (versión 18 o superior recomendada).
+- pnpm instalado globalmente.
+
+Pasos:
+
+1. Ubicarse en la carpeta del proyecto.
+2. Instalar dependencias:
+
+```bash
+pnpm install
+```
+
+3. Levantar el entorno de desarrollo:
+
+```bash
+pnpm dev
+```
+
 ## Validaciones Manuales
 
-Pueden ver el paso a paso de las validaciones manuales que seguí para el cumplimiento de las consignas y los criterios evaluativos [aquí](/unidad4_auth_rutas_ts/docs/validacion_manual_tp_unidad4.md)
+Pueden ver el paso a paso de las validaciones manuales que seguí para el cumplimiento de las consignas y los criterios evaluativos [aquí](docs/validacion_manual_tp_unidad4.md)
 
 ## Uso de console.log para debugging
 
