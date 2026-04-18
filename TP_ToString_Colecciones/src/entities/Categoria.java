@@ -7,6 +7,7 @@ package entities;
  */
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Categoria extends Base {
@@ -20,7 +21,10 @@ public class Categoria extends Base {
     }
 
     public Categoria(String nombre, String descripcion) {
+        super();
         this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.productos = new HashSet<>();
     }
 
     // Getters y setters
@@ -49,16 +53,27 @@ public class Categoria extends Base {
         this.productos = productos;
     }
 
-    //
+    // Sobreescritura de toString, equals y hashCode, sin incluir `productos` para evitar recursividad infinita
+
     @Override
     public String toString() {
         return "Categoria{" +
-                "nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", productos=" + productos +
+                "descripcion='" + descripcion + '\'' +
+                ", nombre='" + nombre + '\'' +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Categoria categoria = (Categoria) o;
+        return Objects.equals(nombre, categoria.nombre) && Objects.equals(descripcion, categoria.descripcion);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), nombre, descripcion);
+    }
 }
 
