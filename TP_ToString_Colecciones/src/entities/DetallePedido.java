@@ -14,8 +14,16 @@ public class DetallePedido extends Base {
     private Pedido pedido;
     private Producto producto;
 
-    public DetallePedido() {
+    public DetallePedido(int cantidad, Producto producto) {
         super();
+        this.cantidad = cantidad;
+        this.producto = producto;
+
+        if (producto != null && producto.getPrecio() != null) {
+            this.subtotal = cantidad * producto.getPrecio();
+        } else {
+            this.subtotal = 0.0;
+        }
     }
 
     public DetallePedido(int cantidad, Double subtotal, Pedido pedido, Producto producto) {
@@ -24,6 +32,13 @@ public class DetallePedido extends Base {
         this.subtotal = subtotal;
         this.pedido = pedido;
         this.producto = producto;
+
+        // Validación para subtotal: si el producto es null o su precio es null, el subtotal se establece en 0.0
+        if (producto != null && producto.getPrecio() != null) {
+            this.subtotal = cantidad * producto.getPrecio();
+        } else {
+            this.subtotal = 0.0;
+        }
     }
 
     public int getCantidad() {
@@ -60,9 +75,16 @@ public class DetallePedido extends Base {
 
     @Override
     public String toString() {
+        // Se imprime solo el nombre del producto para evitar toString recursivos.
+        String nombreProducto = "sin producto";
+        if (producto != null) {
+            nombreProducto = producto.getNombre();
+        }
+
         return "DetallePedido{" +
-                "subtotal=" + subtotal +
-                ", cantidad=" + cantidad +
+                "cantidad=" + cantidad +
+                ", subtotal=" + subtotal +
+                ", producto='" + nombreProducto + '\'' +
                 '}';
     }
 

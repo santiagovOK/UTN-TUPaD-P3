@@ -104,14 +104,15 @@ public class Producto extends Base {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        // Se compara por campos propios del producto para permitir detectar duplicados lógicos en Set.
         Producto producto = (Producto) o;
         return stock == producto.stock && disponible == producto.disponible && Objects.equals(nombre, producto.nombre) && Objects.equals(precio, producto.precio) && Objects.equals(descripcion, producto.descripcion) && Objects.equals(imagen, producto.imagen);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), nombre, precio, descripcion, stock, imagen, disponible);
+        // Debe usar los mismos campos que equals para mantener el contrato equals/hashCode.
+        return Objects.hash(nombre, precio, descripcion, stock, imagen, disponible);
     }
 }
 
