@@ -6,74 +6,31 @@ package org.tpUnidad6.entities;
  * <santiago.varela@tupad.utn.edu.ar>
  */
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.EqualsAndHashCode; // no es incluido en el video, pero si queremos mantener lo que hicimos en la unidad 5, tendría que ir.
+import lombok.experimental.SuperBuilder; // si no uso experimental, me lanza error.
+import lombok.Builder;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Getter
+@Setter
+@ToString(exclude = "productos")
+@EqualsAndHashCode
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Categoria extends Base {
     private String nombre;
     private String descripcion;
-    private Set<Producto> productos; // Relación de uno a muchos con Producto
 
-    public Categoria() {
-        super();
-        this.productos = new HashSet<>();
-    }
-
-    public Categoria(String nombre, String descripcion) {
-        super();
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.productos = new HashSet<>();
-    }
-
-    // Getters y setters
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public Set<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setProductos(Set<Producto> productos) {
-        this.productos = productos;
-    }
-
-    // Sobreescritura de toString, equals y hashCode, sin incluir `productos` para evitar recursividad infinita
-
-    @Override
-    public String toString() {
-        return "Categoria{" +
-                "descripcion='" + descripcion + '\'' +
-                ", nombre='" + nombre + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Categoria categoria = (Categoria) o;
-        return Objects.equals(nombre, categoria.nombre) && Objects.equals(descripcion, categoria.descripcion);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), nombre, descripcion);
-    }
+    @Builder.Default // Evita que el campo productos quede null
+    private Set<Producto> productos = new HashSet<>(); // Relación de uno a muchos con Producto. No está en el video, pero dado el UML y lo aplicado en el TP Nº5 debería ir. Dado que antes se inicializaba en el constructor explícitamente, HashSet para en esta misma línea (la del atributo) para que se inicialice
 }
 
