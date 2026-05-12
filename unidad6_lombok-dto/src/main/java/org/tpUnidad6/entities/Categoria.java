@@ -22,7 +22,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString(exclude = "productos") // antes era excluido en el ToString para evitar problemas de recursividad infinita. Ahora se excluye desde Lombok.
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

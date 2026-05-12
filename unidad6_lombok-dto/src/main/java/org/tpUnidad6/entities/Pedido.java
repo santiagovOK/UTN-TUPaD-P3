@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder
+import lombok.experimental.SuperBuilder;
 
 import org.tpUnidad6.enums.Estado;
 import org.tpUnidad6.enums.FormaPago;

@@ -2,6 +2,7 @@ package org.tpUnidad6;
 
 // Santiago Octavio Varela / @santiagovOK (GitHub) <santiago.varela@tupad.utn.edu.ar>
 
+import org.tpUnidad6.dtos.UsuarioDTO;
 import org.tpUnidad6.entities.Categoria;
 import org.tpUnidad6.entities.DetallePedido;
 import org.tpUnidad6.entities.Pedido;
@@ -17,42 +18,59 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
-
 public class Main {
-    static void main(String[] args) {
+    public static void main(String[] args) {
 
-        // 1) Instanciar 2 Usuarios
+        // 1) Instanciar 2 Usuarios usando Builder
+        Usuario usuarioUno = Usuario.builder()
+                .nombre("Santiago")
+                .apellido("Varela")
+                .mail("santiago@email.com")
+                .celular("123456789")
+                .password("password123")
+                .rol(Rol.ADMIN)
+                .build();
 
-        Usuario usuarioUno = new Usuario("Santiago", "Varela", "santiago@email.com", "123456789", "password123", Rol.ADMIN);
-        Usuario usuarioDos = new Usuario("Pedro", "González", "pedro@email.com", "32456782", "password321", Rol.USUARIO);
+        Usuario usuarioDos = Usuario.builder()
+                .nombre("Pedro")
+                .apellido("González")
+                .mail("pedro@email.com")
+                .celular("32456782")
+                .password("password321")
+                .rol(Rol.USUARIO)
+                .build();
 
-        // 3) Instanciar 3 Categorías
+        // 3) Instanciar 3 Categorías usando Builder
+        Categoria categoriaUno = Categoria.builder()
+                .nombre("Bebidas")
+                .descripcion("Bebidas frías y calientes")
+                .build();
 
-        Categoria categoriaUno = new Categoria("Bebidas", "Bebidas frías y calientes");
+        Categoria categoriaDos = Categoria.builder()
+                .nombre("Hamburguesas")
+                .descripcion("Hamburguesas clásicas, vegetarianas y veganas")
+                .build();
 
-        Categoria categoriaDos = new Categoria("Hamburguesas","Hamburguesas clásicas, vegetarianas y veganas");
+        Categoria categoriaTres = Categoria.builder()
+                .nombre("Pizzas")
+                .descripcion("Pizzas clásicas, vegetarianas y veganas")
+                .build();
 
-        Categoria categoriaTres = new Categoria("Pizzas","Pizzas clásicas, vegetarianas y veganas");
+        // 4) Instanciar 10 productos usando Builder
+        Producto prod1 = Producto.builder().nombre("Coca Cola 500ml").precio(1800.0).descripcion("Gaseosa cola").stock(50).imagen("coca500.png").disponible(true).categoria(categoriaUno).build();
+        Producto prod2 = Producto.builder().nombre("Agua Mineral 500ml").precio(1200.0).descripcion("Agua sin gas").stock(60).imagen("agua500.png").disponible(true).categoria(categoriaUno).build();
+        Producto prod3 = Producto.builder().nombre("Jugo Naranja").precio(1600.0).descripcion("Jugo natural").stock(40).imagen("jugo_naranja.png").disponible(true).categoria(categoriaUno).build();
 
-        // 4) Instanciar 10 productos
+        Producto prod4 = Producto.builder().nombre("Hamburguesa Clasica").precio(6500.0).descripcion("Carne, queso y huevo").stock(30).imagen("hamb_clasica.png").disponible(true).categoria(categoriaDos).build();
+        Producto prod5 = Producto.builder().nombre("Hamburguesa Doble").precio(8200.0).descripcion("Doble carne y doble queso").stock(25).imagen("hamb_doble.png").disponible(true).categoria(categoriaDos).build();
+        Producto prod6 = Producto.builder().nombre("Hamburguesa Veggie").precio(7000.0).descripcion("Medallon vegetal con queso").stock(20).imagen("hamb_veggie.png").disponible(true).categoria(categoriaDos).build();
+        Producto prod7 = Producto.builder().nombre("Hamburguesa Vegana").precio(7300.0).descripcion("Sin ingredientes de origen animal").stock(18).imagen("hamb_vegana.png").disponible(true).categoria(categoriaDos).build();
 
-
-        Producto prod1 = new Producto("Coca Cola 500ml", 1800.0, "Gaseosa cola", 50, "coca500.png", true, categoriaUno);
-        Producto prod2 = new Producto("Agua Mineral 500ml", 1200.0, "Agua sin gas", 60, "agua500.png", true, categoriaUno);
-        Producto prod3 = new Producto("Jugo Naranja", 1600.0, "Jugo natural", 40, "jugo_naranja.png", true, categoriaUno);
-
-        Producto prod4 = new Producto("Hamburguesa Clasica", 6500.0, "Carne, queso y huevo", 30, "hamb_clasica.png", true, categoriaDos);
-        Producto prod5 = new Producto("Hamburguesa Doble", 8200.0, "Doble carne y doble queso", 25, "hamb_doble.png", true, categoriaDos);
-        Producto prod6 = new Producto("Hamburguesa Veggie", 7000.0, "Medallon vegetal con queso", 20, "hamb_veggie.png", true, categoriaDos);
-        Producto prod7 = new Producto("Hamburguesa Vegana", 7300.0, "Sin ingredientes de origen animal", 18, "hamb_vegana.png", true, categoriaDos);
-
-        Producto prod8 = new Producto("Pizza Muzzarella", 13000.0, "Pizza clasica de muzzarella", 15, "pizza_muzza.png", true, categoriaTres);
-        Producto prod9 = new Producto("Pizza Napolitana", 15000.0, "Tomate, ajo y oregano", 12, "pizza_napo.png", true, categoriaTres);
-        Producto prod10 = new Producto("Pizza Especial", 15500.0, "Jamon, morron y huevo", 10, "pizza_especial.png", true, categoriaTres);
+        Producto prod8 = Producto.builder().nombre("Pizza Muzzarella").precio(13000.0).descripcion("Pizza clasica de muzzarella").stock(15).imagen("pizza_muzza.png").disponible(true).categoria(categoriaTres).build();
+        Producto prod9 = Producto.builder().nombre("Pizza Napolitana").precio(15000.0).descripcion("Tomate, ajo y oregano").stock(12).imagen("pizza_napo.png").disponible(true).categoria(categoriaTres).build();
+        Producto prod10 = Producto.builder().nombre("Pizza Especial").precio(15500.0).descripcion("Jamon, morron y huevo").stock(10).imagen("pizza_especial.png").disponible(true).categoria(categoriaTres).build();
 
         // Relacion categoria -> productos
-
         categoriaUno.getProductos().add(prod1);
         categoriaUno.getProductos().add(prod2);
         categoriaUno.getProductos().add(prod3);
@@ -66,23 +84,20 @@ public class Main {
         categoriaTres.getProductos().add(prod9);
         categoriaTres.getProductos().add(prod10);
 
-        // 2) Instanciar 3 Pedidos
-
-        Pedido pedido1 = new Pedido(LocalDate.now(), Estado.PENDIENTE, 0.0, FormaPago.EFECTIVO);
+        // 2) Instanciar 3 Pedidos usando Builder
+        Pedido pedido1 = Pedido.builder().fecha(LocalDate.now()).estado(Estado.PENDIENTE).formaPago(FormaPago.EFECTIVO).build();
         pedido1.addDetallePedido(2, prod1);
         pedido1.addDetallePedido(1, prod2);
 
-        Pedido pedido2 = new Pedido(LocalDate.now(), Estado.PENDIENTE, 0.0, FormaPago.TARJETA);
+        Pedido pedido2 = Pedido.builder().fecha(LocalDate.now()).estado(Estado.PENDIENTE).formaPago(FormaPago.TARJETA).build();
         pedido2.addDetallePedido(3, prod3);
         pedido2.addDetallePedido(2, prod4);
 
-        Pedido pedido3 = new Pedido(LocalDate.now(), Estado.TERMINADO, 0.0, FormaPago.TRANSFERENCIA);
+        Pedido pedido3 = Pedido.builder().fecha(LocalDate.now()).estado(Estado.TERMINADO).formaPago(FormaPago.TRANSFERENCIA).build();
         pedido3.addDetallePedido(1, prod5);
         pedido3.addDetallePedido(4, prod6);
 
-        // Consignas posteriores a las solicitudes para instanciar:
-
-        // Coleccion general de productos cargados
+        // Coleccion general de productos cargados (esto queda igual que antes)
         Set<Producto> productos = new HashSet<>();
         productos.add(prod1);
         productos.add(prod2);
@@ -95,7 +110,7 @@ public class Main {
         productos.add(prod9);
         productos.add(prod10);
 
-        // Asignación de pedidos por usuario para resolver la consigna del usuario con mas pedidos
+        // Asignación de pedidos por usuario (esto queda igual que antes)
         Map<Usuario, Set<Pedido>> pedidosPorUsuario = new HashMap<>();
         pedidosPorUsuario.put(usuarioUno, new HashSet<>());
         pedidosPorUsuario.put(usuarioDos, new HashSet<>());
@@ -103,6 +118,8 @@ public class Main {
         pedidosPorUsuario.get(usuarioUno).add(pedido1);
         pedidosPorUsuario.get(usuarioUno).add(pedido2);
         pedidosPorUsuario.get(usuarioDos).add(pedido3);
+
+        // --- SALIDAS POR CONSOLA SOLICITADAS ---
 
         // Mostrar por consola un producto
         System.out.println("Muestro un producto:");
@@ -118,11 +135,8 @@ public class Main {
         Usuario usuarioConMasPedidos = null;
         int maxPedidos = -1;
 
-        // Recorremos el mapa usuario -> set de pedidos para encontrar el mayor tamaño de colección.
         for (Map.Entry<Usuario, Set<Pedido>> entrada : pedidosPorUsuario.entrySet()) {
             int cantidadPedidos = entrada.getValue().size();
-
-            // Si el usuario actual supera el máximo encontrado, actualizamos referencia y contador.
             if (cantidadPedidos > maxPedidos) {
                 maxPedidos = cantidadPedidos;
                 usuarioConMasPedidos = entrada.getKey();
@@ -133,34 +147,42 @@ public class Main {
         System.out.println(usuarioConMasPedidos);
         System.out.println("Cantidad de pedidos: " + maxPedidos);
 
-        // Si se encontró usuario válido, mostramos todos sus pedidos y luego el detalle de cada pedido.
         if (usuarioConMasPedidos != null) {
             Set<Pedido> pedidosDelUsuario = pedidosPorUsuario.get(usuarioConMasPedidos);
             for (Pedido pedido : pedidosDelUsuario) {
                 System.out.println(pedido);
-
-                // Cada pedido contiene un Set<DetallePedido>; se imprime para ver producto, cantidad y subtotal.
                 for (DetallePedido detalle : pedido.getDetalles()) {
                     System.out.println("  " + detalle);
                 }
             }
         }
 
-        // Instanciar un producto nuevo con los mismos campos comparados por equals y comparar con toda la coleccion
-        Producto productoDuplicado = new Producto(
-                "Coca Cola 500ml",
-                1800.0,
-                "Gaseosa cola",
-                50,
-                "coca500.png",
-                true,
-                categoriaUno
-        );
+        // Instanciar un producto nuevo con los mismos campos comparados por equals
+        Producto productoDuplicado = Producto.builder()
+                .nombre("Coca Cola 500ml")
+                .precio(1800.0)
+                .descripcion("Gaseosa cola")
+                .stock(50)
+                .imagen("coca500.png")
+                .disponible(true)
+                .categoria(categoriaUno)
+                .build();
 
         System.out.println("\n=== Comparacion de producto nuevo vs coleccion ===");
         for (Producto producto : productos) {
             System.out.println("Duplicado equals " + producto.getNombre() + " -> " + productoDuplicado.equals(producto));
         }
         System.out.println("Set contiene producto duplicado: " + productos.contains(productoDuplicado));
+
+        // Prueba final: Mostrar el UsuarioDTO
+        System.out.println("\n=== Demostración de Usuario DTO ===");
+        UsuarioDTO dto = new UsuarioDTO(
+                usuarioUno.getId(),
+                usuarioUno.getNombre(),
+                usuarioUno.getApellido(),
+                usuarioUno.getMail(),
+                usuarioUno.getCelular()
+        );
+        System.out.println("Usuario DTO generado: " + dto);
     }
 }
