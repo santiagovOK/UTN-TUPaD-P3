@@ -7,7 +7,6 @@ package org.tpUnidad6.dtos;
  */
 
 public record UsuarioDTO(
-        Long id,
         String nombre,
         String apellido,
         String mail,

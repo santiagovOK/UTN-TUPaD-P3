@@ -177,7 +177,6 @@ public class Main {
         // Prueba final: Mostrar el UsuarioDTO
         System.out.println("\n=== Demostración de Usuario DTO ===");
         UsuarioDTO dto = new UsuarioDTO(
-                usuarioUno.getId(),
                 usuarioUno.getNombre(),
                 usuarioUno.getApellido(),
                 usuarioUno.getMail(),
