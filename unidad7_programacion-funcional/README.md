@@ -1,5 +1,7 @@
 # Trabajo Práctico - Unidad 7 (Java - Programación Funcional )
 
+En esta unidad cree un archivo Markdown para la resolución de cada una de las consignas (principalmente para guiarme yo y poder revisar los cambios unidad por unidad en el proyecto.). Pueden verlo aquí: [docs/resolucion.md](docs/resolucion.md)
+
 ✨ Estudiante
 
 - Nombre: Varela, Santiago Octavio

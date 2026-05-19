@@ -57,7 +57,7 @@ public class Main {
                 .build();
 
         // 4) Instanciar 10 productos usando Builder
-        Producto prod1 = Producto.builder().nombre("Coca Cola 500ml").precio(1800.0).descripcion("Gaseosa cola").stock(50).imagen("coca500.png").disponible(true).categoria(categoriaUno).build();
+        Producto prod1 = Producto.builder().nombre("Coca Cola 500ml").precio(1800.0).descripcion("Gaseosa cola").stock(4).imagen("coca500.png").disponible(true).categoria(categoriaUno).build();
         Producto prod2 = Producto.builder().nombre("Agua Mineral 500ml").precio(1200.0).descripcion("Agua sin gas").stock(60).imagen("agua500.png").disponible(true).categoria(categoriaUno).build();
         Producto prod3 = Producto.builder().nombre("Jugo Naranja").precio(1600.0).descripcion("Jugo natural").stock(40).imagen("jugo_naranja.png").disponible(true).categoria(categoriaUno).build();
 
@@ -193,6 +193,19 @@ public class Main {
                 .forEach(p -> System.out.println("- " + p.getNombre()));
 
         // Consigna 3 - Mostrar por consola la cantidad de ítems que tiene un pedido
+
+        System.out.println("\n=== Cantidad de ítems en Pedido 1 ===");
+        int cantidadItems = pedido1.getDetalles().stream()
+                .mapToInt(DetallePedido::getCantidad)
+                .sum();
+        System.out.println("El pedido 1 contiene " + cantidadItems + " ítems en total.");
+
+        // Consigna 4 - Detectar productos que tengan menos de 5 como valor en stock (cambié "Coca Cola 500ml" (prod1) para que aparezca)
+
+        System.out.println("\n=== Productos con stock menor a 5 ===");
+        productos.stream()
+                .filter(p -> p.getStock() < 5)
+                .forEach(p -> System.out.println("ALERTA - " + p.getNombre() + " (Stock: " + p.getStock() + ")"));
 
     }
 
