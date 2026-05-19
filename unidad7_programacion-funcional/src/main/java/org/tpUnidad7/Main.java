@@ -119,8 +119,6 @@ public class Main {
         pedidosPorUsuario.get(usuarioUno).add(pedido2);
         pedidosPorUsuario.get(usuarioDos).add(pedido3);
 
-        // --- SALIDAS POR CONSOLA SOLICITADAS ---
-
         // Mostrar por consola un producto
         System.out.println("Muestro un producto:");
         System.out.println(prod1);
@@ -183,5 +181,20 @@ public class Main {
                 usuarioUno.getCelular()
         );
         System.out.println("Usuario DTO generado: " + dto);
+
+        // --- SALIDAS POR CONSOLA SOLICITADAS PARA TP UNIDAD 7 ---
+
+
+        // Consigna 2 - Mostrar por consola productos disponibles
+        System.out.println("\n=== Productos disponibles ===");
+        productos.stream()
+                // equivaldría a p -> p.isDisponible()
+                .filter(Producto::isDisponible)
+                .forEach(p -> System.out.println("- " + p.getNombre()));
+
+        // Consigna 3 - Mostrar por consola la cantidad de ítems que tiene un pedido
+
     }
+
+
 }

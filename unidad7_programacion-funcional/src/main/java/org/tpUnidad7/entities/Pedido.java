@@ -63,15 +63,11 @@ public class Pedido extends Base implements Calculable {
     }
     @Override
     public void calcularTotal() {
-        Double acumuladorTotal = 0.0;
-        if (detalles != null) {
-            for (DetallePedido detalle : detalles) {
-                // Ahora getSubtotal() hace el cálculo al vuelo (cambios en DetallePedido)
-                acumuladorTotal += detalle.getSubtotal();
-            }
-        }
-        this.total = acumuladorTotal;
+        this.total = java.util.Optional.ofNullable(this.detalles)
+                .map(det -> det.stream()
+                        .mapToDouble(DetallePedido::getSubtotal)
+                        .sum())
+                .orElse(0.0);
     }
 
 }
-
