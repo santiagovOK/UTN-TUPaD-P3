@@ -5,6 +5,9 @@ package org.tpUnidad8.entities;
  * @author Santiago Octavio Varela / @santiagovOK (GitHub)
  * <santiago.varela@tupad.utn.edu.ar>
  */
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,9 +26,15 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Entity
 public class DetallePedido extends Base {
     private int cantidad;
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
+
+    @ManyToOne
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     // Reescribimos el Getter que haría Lombok para calcular subtotal.
@@ -37,4 +46,3 @@ public class DetallePedido extends Base {
         return 0.0;
     }
 }
-

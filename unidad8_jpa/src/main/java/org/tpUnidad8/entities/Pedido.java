@@ -6,6 +6,11 @@ package org.tpUnidad8.entities;
  * <santiago.varela@tupad.utn.edu.ar>
  */
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -34,16 +39,19 @@ import java.util.Set;
 @AllArgsConstructor
 
 // en el ejemplo del video, Calculable no está implementado, pero lo agrego para que se pueda calcular el total del pedido y es lo correcto hacerlo aquí en cuanto al UML (Acerca de cómo venía el tp - unidad 5)
-
+@Entity
 public class Pedido extends Base implements Calculable {
 
     private LocalDate fecha;
+    @Enumerated(EnumType.STRING)
     private Estado estado;
     private Double total;
+    @Enumerated(EnumType.STRING)
     private FormaPago formaPago;
 
     // Inicializamos el Set para que no lance NullPointerException
     @Builder.Default
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true) // Esto asegura que al eliminar un pedido, se eliminen sus detalles asociados y que al agregar un detalle, se asocie correctamente al pedido.
     private Set<DetallePedido> detalles = new HashSet<>();
 
     // Mantenemos la lógica el método, pero instanciando con Lombok
