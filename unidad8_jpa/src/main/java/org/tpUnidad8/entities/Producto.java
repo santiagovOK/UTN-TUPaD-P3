@@ -7,6 +7,9 @@ package org.tpUnidad8.entities;
  * <santiago.varela@tupad.utn.edu.ar>
  */
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,6 +27,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+
+@Entity
 public class Producto extends Base {
 
     private String nombre;
@@ -33,7 +38,8 @@ public class Producto extends Base {
     private String imagen;
     private boolean disponible;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria; // Atributo faltante en el UML, pero que marca la relación de agregación 1 a muchos con Categoria
 
 }
-

@@ -6,6 +6,8 @@ package org.tpUnidad8.entities;
  * <santiago.varela@tupad.utn.edu.ar>
  */
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,11 +27,12 @@ import java.util.Set;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Categoria extends Base {
     private String nombre;
     private String descripcion;
 
+    @OneToMany(mappedBy = "categoria")
     @Builder.Default // Evita que el campo productos quede null
     private Set<Producto> productos = new HashSet<>(); // Relación de uno a muchos con Producto. No está en el video, pero dado el UML y lo aplicado en el TP Nº5 debería ir. Dado que antes se inicializaba en el constructor explícitamente, HashSet para en esta misma línea (la del atributo) para que se inicialice
 }
-

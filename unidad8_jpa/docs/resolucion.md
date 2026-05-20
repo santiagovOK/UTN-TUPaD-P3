@@ -10,3 +10,9 @@ Se incorporaron y actualizaron las dependencias de **Hibernate Core** (proveedor
 
 **a) Mapear la Clase Base**
 Se agregó la anotación `@MappedSuperclass` a la clase `Base` para que sus propiedades (`id`, `eliminado`, `createdAt`) se hereden en las tablas de las entidades hijas. Se importó `jakarta.persistence.*` y se configuró el atributo `id` como clave primaria autoincremental utilizando `@Id` y `@GeneratedValue(strategy = GenerationType.IDENTITY)`.
+
+**b) Mapear Entidades Simples (`Usuario` y `Categoria`)**
+Configuración de las entidades `Usuario` y `Categoria` con la anotación `@Entity` **a nivel de clase** para que JPA las reconozca como tablas de la base de datos (y hereden automáticamente el id de `Base`). En `Usuario`, se aseguró que el atributo `mail` sea único utilizando `@Column(unique = true)` y se mapeó el enum `Rol` al formato de base de datos correspondiente mediante `@Enumerated(EnumType.STRING)` para que se persista el valor en texto y no de forma numérica.
+
+**c) Mapear Entidad Producto y su Relación ManyToOne**
+A la clase `Producto` se le añadió la anotación `@Entity` a nivel de clase. Para configurar la relación con la categoría a la que pertenece, se agregó `@ManyToOne` en el atributo `categoria` y se especificó la columna foránea con `@JoinColumn(name = "categoria_id")`. De igual manera, se actualizó la clase `Categoria`, añadiéndole `@OneToMany(mappedBy = "categoria")` (mostrando quien es el dueño en la relación) en su colección de `productos` para que ambas clases mantengan la relación bidireccional correctamente y no se generen tablas intermedias innecesarias.
