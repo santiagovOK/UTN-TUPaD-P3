@@ -18,6 +18,10 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.46")
     testCompileOnly("org.projectlombok:lombok:1.18.46")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.46")
+
+    // Dependencias para JPA (Hibernate) y Base de Datos H2
+    implementation("org.hibernate.orm:hibernate-core:6.4.10.Final")
+    runtimeOnly("com.h2database:h2:2.4.240")
 }
 
 tasks.test {

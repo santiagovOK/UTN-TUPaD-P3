@@ -14,6 +14,11 @@ import lombok.ToString;
 import lombok.EqualsAndHashCode; // no es incluido en el video, pero si queremos mantener lo que hicimos en la unidad 5, tendría que ir.
 import lombok.experimental.SuperBuilder; // si no uso experimental, me lanza error.
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+
 import java.time.LocalDateTime;
 
 @Getter
@@ -23,17 +28,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EqualsAndHashCode
 @SuperBuilder
-
-
-
+@MappedSuperclass
 public class Base {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private boolean eliminado;
     private LocalDateTime createdAt;
 }
-
-
-
-
-
-
