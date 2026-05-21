@@ -169,7 +169,65 @@ public class Main {
             // Si hay un error, revertimos los cambios
             em.getTransaction().rollback();
         }
-        // Por ahora  no cerré 'em.close()' porque falta el paso 8
+
+        // --- TP Nº8 - Consignas 3,4,5,6 - Operaciones CRUD solicitadas ---
+
+        try {
+            // Abrimos una nueva transacción para hacer las modificaciones
+            em.getTransaction().begin();
+
+            // Consigna 3 - Actualizar al menos 2 productos
+            System.out.println("\n--- 1. Actualizar al menos 2 productos ---");
+            Producto productoUpdate1 = em.find(Producto.class, 1L); // Asumiendo que obtendrá el de ID 1
+            if (productoUpdate1 != null) {
+                productoUpdate1.setPrecio(2000.0); // Cambiamos el precio
+                System.out.println("Producto 1 actualizado: " + productoUpdate1.getNombre() + " a $" + productoUpdate1.getPrecio());
+            }
+
+            Producto productoUpdate2 = em.find(Producto.class, 2L); // Asumiendo que obtendrá el de ID 2
+            if (productoUpdate2 != null) {
+                productoUpdate2.setStock(150); // Cambiamos el stock
+                System.out.println("Producto 2 actualizado: " + productoUpdate2.getNombre() + " a " + productoUpdate2.getStock() + " unidades");
+            }
+
+            // Consigna 4 - Buscar Usuario por id
+            System.out.println("\n--- 2. Buscar Usuario por ID ---");
+            Usuario usuarioBuscadoId = em.find(Usuario.class, 1L);
+            if (usuarioBuscadoId != null) {
+                System.out.println("Usuario encontrado por ID 1: " + usuarioBuscadoId.getNombre() + " " + usuarioBuscadoId.getApellido());
+            }
+
+            // Consigna 5 - Buscar Usuario por mail
+            System.out.println("\n--- 3. Buscar Usuario por mail ---");
+            String mailABuscar = "santiago@email.com";
+            // Se realiza la consulta mediante JPQL (no vimos createQuery en los materiales si no me equivoco, pero es una función del EntityManager en JPA utilizada para crear y definir una instancia de consulta dinámica)
+            Usuario usuarioBuscadoMail = em.createQuery("SELECT u FROM Usuario u WHERE u.mail = :mail", Usuario.class)
+                    .setParameter("mail", mailABuscar)
+                    .getSingleResult();
+            System.out.println("Usuario encontrado por mail: " + usuarioBuscadoMail.getNombre() + " - Rol: " + usuarioBuscadoMail.getRol());
+
+            // Consigna 6 - Borrar 1 producto
+            System.out.println("\n--- 4. Borrar 1 producto ---");
+            // Se busca el producto ID 10 ("Pizza Especial") para eliminarlo.
+            Producto productoABorrar = em.find(Producto.class, 10L);
+            if (productoABorrar != null) {
+                em.remove(productoABorrar);
+                System.out.println("Producto borrado exitosamente: " + productoABorrar.getNombre());
+            }
+
+            // Se insertan las operaciones a la base de datos
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            // Cerramos el EntityManager y su Factory porque ya terminamos todas las interacciones con JPA
+            em.close();
+            emf.close();
+        }
 
         // Mostrar por consola un producto
         System.out.println("Muestro un producto:");

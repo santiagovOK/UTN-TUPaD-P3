@@ -21,10 +21,22 @@ A la clase `Producto` se le añadió la anotación `@Entity` a nivel de clase. P
 A ambas clases se les colocó la etiqueta `@Entity`. En `Pedido`, para mantener la composición fuerte con sus detalles, se utilizó `@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)` sobre la colección de `DetallePedido`. Del otro lado, en la clase `DetallePedido`, se configuró `@ManyToOne` en el atributo `pedido` con `@JoinColumn(name = "pedido_id")` para declarar quién sostiene la clave foránea en la base de datos (relación bidireccional donde JPA entiende que la tabla de detalles lleva el peso de la FK, aunque lógicamente `Pedido` domine el ciclo de vida). También se le agregó la relación con la entidad `Producto` a través de otro `@ManyToOne` y un respectivo `@JoinColumn(name = "producto_id")`.
 
 **e) EntityManagerFactor en Main**
-Se instanció `EntityManagerFactory` llamando a la unidad `unidad8_jpa` (definida en `persistence.xml`), obteniéndose un `EntityManager`. Dentro de un **bloque transaccional** (`em.getTransaction().begin() ... commit`), 
+Se instanció `EntityManagerFactory` llamando a la unidad `unidad8_jpa` (definida en `persistence.xml`), obteniéndose un `EntityManager`. Dentro de un **bloque transaccional** (`em.getTransaction().begin() ... commit`), se persistieron todos los objetos creados anteriormente: 2 Usuarios, 3 Categorías, 10 Productos y 3 Pedidos. El guardado de estos últimos implicó automáticamente a sus respectivos `DetallePedido` debido al uso de `CascadeType.ALL`.
 
-# Consigna 2 - Instanciar y Persistir Objetos
+# Consigna 3 a 6 Operaciones CRUD
+**Operaciones extra con la DB**
+Luego de la persistencia inicial, en un segundo bloque transaccional se utilizó el `EntityManager` para cumplir los siguientes requerimientos:
+- **3) Actualizar al menos 2 productos**: Se utilizaron `em.find()` para obtener dos entidades `Producto` (con ID 1 y 2). A través de sus métodos setters, se modificaron los valores de `precio` y `stock`.
+- **4) Buscar Usuario por id**: Se utilizó `em.find(Usuario.class, 1L)` para buscar exitosamente el primer usuario y mostrarlo por consola.
+- **5) Buscar Usuario por mail**: Se preparó una consulta con JPQL (`em.createQuery(...)`), donde se buscó un usuario cuyo atributo mail coincidiera con `"santiago@email.com"` pasando el argumento a través de `.setParameter("mail", mailABuscar)`.
+- **6) Borrar 1 producto**: Por último, se hizo otro `em.find()` para localizar un producto. Se seleccionó de forma estratégica el producto de ID 10 ("Pizza Especial") porque no contaba con registros cargados de detalle en transacciones de `Pedido`, evitando problemas de integridad referencial (tengo que reever esto). Una vez obtenido, se lo eliminó de la base de datos usando `em.remove(productoABorrar)`. Se cerró la transacción con `.commit()` y se finalizó correctamente el `EntityManagerFactory`.
 
-Se persistieron todos los objetos creados anteriormente: 2 Usuarios, 3 Categorías, 10 Productos y 3 Pedidos. El guardado de estos últimos implicó automáticamente a sus respectivos `DetallePedido` debido al uso de `CascadeType.ALL`.
+# Validación de la persistencia con H2
+- **Saved Settings:** `Generic H2 (Embedded)`
+- **Setting Name:** `Generic H2 (Embedded)`
+- **Driver Class:** `org.h2.Driver`
+- **JDBC URL:** `jdbc:h2:file:/<RUTA_ABSOLUTA_DEL_PROYECTO>/unidad8_jpa/data/jpa_db`
+- **User Name:** `sa`
+- **Password:** `<VACÍO>`
 
-# Consigna 3 - Actualizar Productos (al menos 2)
+Con esos datos se puede abrir la consola web de H2 y revisar las tablas generadas por JPA, junto con los registros persistidos en la carpeta `data/` del proyecto.
