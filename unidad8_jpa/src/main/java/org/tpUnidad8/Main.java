@@ -18,6 +18,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -119,6 +123,54 @@ public class Main {
         pedidosPorUsuario.get(usuarioUno).add(pedido2);
         pedidosPorUsuario.get(usuarioDos).add(pedido3);
 
+        // --- TP Nº8 - CONFIGURAR Y EJECUTAR EL ENTITY MANAGER ---
+        // Se conecta usando el nombre de la unidad definida en persistence.xml
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("unidad8_jpa");
+        EntityManager em = emf.createEntityManager();
+
+        // --- TP Nº8 - Instanciamiento y persistencia de lo solicitado en la consigna Nª3 (envuelto en try-catch para evitar errores) ---
+
+        try {
+            // Se abre la transacción
+            em.getTransaction().begin();
+
+            // Se guardan las Categorías
+            em.persist(categoriaUno);
+            em.persist(categoriaDos);
+            em.persist(categoriaTres);
+
+            // Se guardan los Usuarios
+            em.persist(usuarioUno);
+            em.persist(usuarioDos);
+
+            // Se guardan los Productos (No es necesario hacer persist explícito si usé cascade = CascadeType.ALL en Categoria, pero es buena práctica)
+            em.persist(prod1);
+            em.persist(prod2);
+            em.persist(prod3);
+            em.persist(prod4);
+            em.persist(prod5);
+            em.persist(prod6);
+            em.persist(prod7);
+            em.persist(prod8);
+            em.persist(prod9);
+            em.persist(prod10);
+
+            // Se guardan los Pedidos (Al tener cascade, va a guardar los DetallePedido automáticamente)
+            em.persist(pedido1);
+            em.persist(pedido2);
+            em.persist(pedido3);
+
+            // Se efectua el guardado en la base de datos
+            em.getTransaction().commit();
+            System.out.println("Datos persistidos en H2 con éxito.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Si hay un error, revertimos los cambios
+            em.getTransaction().rollback();
+        }
+        // Por ahora  no cerré 'em.close()' porque falta el paso 8
+
         // Mostrar por consola un producto
         System.out.println("Muestro un producto:");
         System.out.println(prod1);
@@ -145,12 +197,14 @@ public class Main {
         System.out.println(usuarioConMasPedidos);
         System.out.println("Cantidad de pedidos: " + maxPedidos);
 
-        if (usuarioConMasPedidos != null) {
+        if (usuarioConMasPedidos != null && pedidosPorUsuario.containsKey(usuarioConMasPedidos)) {
             Set<Pedido> pedidosDelUsuario = pedidosPorUsuario.get(usuarioConMasPedidos);
-            for (Pedido pedido : pedidosDelUsuario) {
-                System.out.println(pedido);
-                for (DetallePedido detalle : pedido.getDetalles()) {
-                    System.out.println("  " + detalle);
+            if (pedidosDelUsuario != null) {
+                for (Pedido pedido : pedidosDelUsuario) {
+                    System.out.println(pedido);
+                    for (DetallePedido detalle : pedido.getDetalles()) {
+                        System.out.println("  " + detalle);
+                    }
                 }
             }
         }

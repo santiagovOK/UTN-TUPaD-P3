@@ -20,4 +20,11 @@ A la clase `Producto` se le añadió la anotación `@Entity` a nivel de clase. P
 **d) Mapear Entidades `Pedido` y `DetallePedido` (Relación de Composición)**
 A ambas clases se les colocó la etiqueta `@Entity`. En `Pedido`, para mantener la composición fuerte con sus detalles, se utilizó `@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)` sobre la colección de `DetallePedido`. Del otro lado, en la clase `DetallePedido`, se configuró `@ManyToOne` en el atributo `pedido` con `@JoinColumn(name = "pedido_id")` para declarar quién sostiene la clave foránea en la base de datos (relación bidireccional donde JPA entiende que la tabla de detalles lleva el peso de la FK, aunque lógicamente `Pedido` domine el ciclo de vida). También se le agregó la relación con la entidad `Producto` a través de otro `@ManyToOne` y un respectivo `@JoinColumn(name = "producto_id")`.
 
-**d) EntityManagerFactor en Main**
+**e) EntityManagerFactor en Main**
+Se instanció `EntityManagerFactory` llamando a la unidad `unidad8_jpa` (definida en `persistence.xml`), obteniéndose un `EntityManager`. Dentro de un **bloque transaccional** (`em.getTransaction().begin() ... commit`), 
+
+# Consigna 2 - Instanciar y Persistir Objetos
+
+Se persistieron todos los objetos creados anteriormente: 2 Usuarios, 3 Categorías, 10 Productos y 3 Pedidos. El guardado de estos últimos implicó automáticamente a sus respectivos `DetallePedido` debido al uso de `CascadeType.ALL`.
+
+# Consigna 3 - Actualizar Productos (al menos 2)

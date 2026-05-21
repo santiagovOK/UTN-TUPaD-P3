@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    application
 }
 
 group = "org.tpUnidad8"
@@ -22,6 +23,10 @@ dependencies {
     // Dependencias para JPA (Hibernate) y Base de Datos H2
     implementation("org.hibernate.orm:hibernate-core:6.4.10.Final")
     runtimeOnly("com.h2database:h2:2.4.240")
+}
+
+application {
+    mainClass.set("org.tpUnidad8.Main")
 }
 
 tasks.test {
