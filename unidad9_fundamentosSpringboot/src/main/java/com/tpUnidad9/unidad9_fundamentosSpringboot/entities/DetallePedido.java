@@ -1,4 +1,4 @@
-package org.tpUnidad8.entities;
+package com.tpUnidad9.unidad9_fundamentosSpringboot.entities;
 
 /*
  *

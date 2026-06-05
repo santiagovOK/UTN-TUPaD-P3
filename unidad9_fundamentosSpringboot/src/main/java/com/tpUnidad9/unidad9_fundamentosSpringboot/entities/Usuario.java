@@ -1,4 +1,4 @@
-package org.tpUnidad8.entities;
+package com.tpUnidad9.unidad9_fundamentosSpringboot.entities;
 
 /*
  *
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import org.tpUnidad8.enums.Rol;
+import com.tpUnidad9.unidad9_fundamentosSpringboot.enums.Rol;
 
 @Getter
 @Setter

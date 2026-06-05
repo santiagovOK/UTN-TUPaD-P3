@@ -1,4 +1,4 @@
-package org.tpUnidad8.entities;
+package com.tpUnidad9.unidad9_fundamentosSpringboot.entities;
 
 /*
  *
@@ -20,9 +20,9 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-import org.tpUnidad8.enums.Estado;
-import org.tpUnidad8.enums.FormaPago;
-import org.tpUnidad8.interfaces.Calculable;
+import com.tpUnidad9.unidad9_fundamentosSpringboot.enums.Estado;
+import com.tpUnidad9.unidad9_fundamentosSpringboot.enums.FormaPago;
+import com.tpUnidad9.unidad9_fundamentosSpringboot.interfaces.Calculable;
 
 import java.time.LocalDate;
 import java.util.HashSet;
