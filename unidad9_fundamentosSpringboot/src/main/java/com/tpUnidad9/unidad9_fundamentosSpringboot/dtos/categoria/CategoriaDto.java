@@ -4,15 +4,17 @@ package com.tpUnidad9.unidad9_fundamentosSpringboot.dtos.categoria;
 
 import com.tpUnidad9.unidad9_fundamentosSpringboot.entities.Categoria;
 
-public record CategoriaDto (Long id,
-                            String nombre,
-                            String descripcion,) {
-    public static toDto(Categoria categoria) {
+public record CategoriaDto(
+        Long id,
+        String nombre,
+        String descripcion
+) {
+    // con toDto() se está haciendo referencia a la entidad Categoria, que usa Lombok.
+    public static CategoriaDto toDto(Categoria categoria) {
         return new CategoriaDto(
                 categoria.getId(),
                 categoria.getNombre(),
                 categoria.getDescripcion()
-        );)
+        );
     }
-
 }
