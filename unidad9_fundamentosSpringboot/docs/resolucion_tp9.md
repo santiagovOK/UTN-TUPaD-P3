@@ -24,4 +24,9 @@ Se desarrollaron tres DTOs específicos para gestionar de forma segura los datos
 - **`CategoriaDto`**: Se encarga de la lectura (lo que se expone al cliente). Contiene el `id`, el `nombre` y la `descripcion`. Utiliza un método estático `toDto()` que interactúa con los getters de la entidad generados por Lombok.
 - **`CategoriaEdit`**: Se encarga de la edición. Su método `applyTo(Categoria)` verifica que los datos ingresados no sean nulos antes de modificar la entidad original, evitando borrar información por accidente durante actualizaciones parciales.
 
-*(A partir de aquí, se continuará con la creación de los DTOs para el resto de las entidades).*
+### 3.2. DTOs de Producto
+Se implementó la misma arquitectura de DTOs para la entidad `Producto`, abordando en este caso el manejo de tipos de datos y relaciones de forma segura:
+- **Relaciones por ID**: Para vincular un producto a una categoría, los DTOs (`ProductoCreate` y `ProductoEdit`) solicitan únicamente el identificador (`Long idCategoria`) en lugar de recibir un objeto anidado. Posteriormente, la lógica de negocio (Servicio) es la encargada de buscar la `Categoria` real e inyectarla en la entidad, manteniendo el payload de la API limpio y eficiente.
+- **Uso de Clases Envoltorias (Wrappers - Esto tuvo un poco más de investigación)**: En el `ProductoEdit`, se reemplazaron los tipos primitivos (`int stock`, `boolean disponible`) por sus respectivas clases envoltorias (`Integer`, `Boolean`). Esta práctica es indispensable para operaciones de actualización parcial (PATCH), ya que un tipo primitivo nunca puede ser `null`, lo que causaría la sobreescritura accidental de datos si el cliente no los envía. Al usar Wrappers, se pueden validar los nulos (`if (this.stock != null)`) e ignorar los atributos que no requieren cambios.
+
+*(Se continuará con la creación de los DTOs para las demás entidades como Usuario, Pedido y DetallePedido).*
