@@ -12,6 +12,9 @@ Repositorio donde podrán encontrar mis trabajos de Programación III: https://g
 
 ---
 
+> **Nota:** Este proyecto está configurado en su `build.gradle` para compilar utilizando **Java 25**.
+
+
 <details>
 <summary>Validación visual con H2</summary>
 
