@@ -30,3 +30,13 @@ Se implementó la misma arquitectura de DTOs para la entidad `Producto`, abordan
 - **Uso de Clases Envoltorias (Wrappers - Esto tuvo un poco más de investigación)**: En el `ProductoEdit`, se reemplazaron los tipos primitivos (`int stock`, `boolean disponible`) por sus respectivas clases envoltorias (`Integer`, `Boolean`). Esta práctica es indispensable para operaciones de actualización parcial (PATCH), ya que un tipo primitivo nunca puede ser `null`, lo que causaría la sobreescritura accidental de datos si el cliente no los envía. Al usar Wrappers, se pueden validar los nulos (`if (this.stock != null)`) e ignorar los atributos que no requieren cambios.
 
 *(Se continuará con la creación de los DTOs para las demás entidades como Usuario, Pedido y DetallePedido).*
+
+## 4. Creación de la capa de Repositorios
+Para cumplir con las "Conclusiones Esperadas" respecto al uso de estereotipos y proveer la persistencia de datos mediante Spring Data JPA, se crearon las interfaces de Repositorios para cada una de las entidades:
+- `CategoriaRepository`
+- `ProductoRepository`
+- `UsuarioRepository`
+- `PedidoRepository`
+- `DetallePedidoRepository`
+
+Todas estas interfaces extienden de `JpaRepository<Entidad, Long>`, delegando a Spring la generación de los métodos CRUD y la ejecución de consultas a la base de datos H2. Adicionalmente, fueron decoradas explícitamente con la anotación `@Repository` para denotar su rol en la arquitectura y cumplir con las consignas del Trabajo Práctico.
