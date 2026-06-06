@@ -58,4 +58,9 @@ En su implementación, `CategoriaServiceImpl`, se inyectó el `CategoriaReposito
 - **Guardado (`save`)**: Conversión del DTO de creación a Entidad usando su método `.toEntity()`, persistencia en base de datos y retorno de un `CategoriaDto`.
 - **Búsquedas (`findById` y `findAll`)**: Uso de `orElseThrow` para manejar entidades no encontradas de forma elegante, y uso de *Streams* de Java para mapear listas enteras de entidades a sus respectivos DTOs.
 - **Actualización (`update`)**: Se busca la entidad original, se le aplican los cambios parciales con el método `.applyTo()` del DTO de edición, y se vuelve a persistir.
-- **Baja Lógica (`deleteById`)**: En lugar de hacer un borrado físico, se aprovechó la propiedad `eliminado` heredada de la clase `Base` (migrada del trabajo práctico de JPA) para realizar un borrado con baja lógica, cambiando el estado de eliminado a `true` y conservando el historial en la base de datos.
+- **Baja Lógica (`deleteById`)**: En lugar de hacer un borrado físico destructivo, se aprovechó la propiedad `eliminado` heredada de la clase `Base` (migrada del trabajo práctico de JPA) para realizar un *soft delete*, cambiando el estado a `true` y conservando el historial en la base de datos.
+
+### 5.2. Servicio de Productos
+Siguiendo la misma estructura arquitectónica, se implementaron `ProductoService` y su respectiva implementación `ProductoServiceImp` (anotada con `@Service`). En este servicio se destaca el manejo de la relación entre entidades:
+- **Asignación de Relaciones**: Al crear (`save`) o editar (`update`) un producto, los DTOs proporcionan únicamente el referencial `idCategoria`. Es responsabilidad exclusiva de la lógica de negocio del servicio utilizar el `CategoriaRepository` inyectado para buscar la entidad `Categoria` real en la base de datos y asociarla al Producto antes de persistirlo.
+- Se replicaron también las buenas prácticas de manejo de excepciones con `orElseThrow`, transformación de colecciones mediante *Streams*, la inyección de dependencias por constructor, y el borrado seguro con baja lógica en el método `deleteById`.
