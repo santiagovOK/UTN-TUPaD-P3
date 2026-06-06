@@ -29,7 +29,15 @@ Se implementó la misma arquitectura de DTOs para la entidad `Producto`, abordan
 - **Relaciones por ID**: Para vincular un producto a una categoría, los DTOs (`ProductoCreate` y `ProductoEdit`) solicitan únicamente el identificador (`Long idCategoria`) en lugar de recibir un objeto anidado. Posteriormente, la lógica de negocio (Servicio) es la encargada de buscar la `Categoria` real e inyectarla en la entidad, manteniendo el payload de la API limpio y eficiente.
 - **Uso de Clases Envoltorias (Wrappers - Esto tuvo un poco más de investigación)**: En el `ProductoEdit`, se reemplazaron los tipos primitivos (`int stock`, `boolean disponible`) por sus respectivas clases envoltorias (`Integer`, `Boolean`). Esta práctica es indispensable para operaciones de actualización parcial (PATCH), ya que un tipo primitivo nunca puede ser `null`, lo que causaría la sobreescritura accidental de datos si el cliente no los envía. Al usar Wrappers, se pueden validar los nulos (`if (this.stock != null)`) e ignorar los atributos que no requieren cambios.
 
-*(Se continuará con la creación de los DTOs para las demás entidades como Usuario, Pedido y DetallePedido).*
+### 3.3. DTOs de Usuario
+Se estructuraron los DTOs (`UsuarioCreate`, `UsuarioDto`, `UsuarioEdit`) como `record` para aprovechar su inmutabilidad. En el `UsuarioDto` se agregó explícitamente el campo `id` necesario para la identificación en el cliente, y se excluyeron datos sensibles como la contraseña y el rol por seguridad. También se centralizó la lógica de conversión en el método estático `toDto()` y se implementó el patrón Builder de Lombok en `toEntity()` para construir la entidad de forma segura.
+
+### 3.4. DTOs de Pedido
+Para la entidad `Pedido`, el `PedidoDto` incluye los datos principales y se encarga de transformar su lista interna de `DetallePedido` a una lista de `DetallePedidoDto` usando *Streams*. Por su parte, el `PedidoEdit` se diseñó restringido para permitir únicamente la modificación del `estado` y la `formaPago`, protegiendo así el resto de la información inmutable del pedido.
+
+### 3.5. DTOs de DetallePedido
+El `DetallePedidoDto` expone la `cantidad`, el nombre del producto asociado y el `subtotal` (que es un valor calculado). Al igual que en la arquitectura de productos, el `DetallePedidoCreate` únicamente solicita la cantidad y el identificador referencial (`idProducto`), delegando la búsqueda de la entidad Producto real a la futura capa de Servicios.
+
 
 ## 4. Creación de la capa de Repositorios
 Para cumplir con las "Conclusiones Esperadas" respecto al uso de estereotipos y proveer la persistencia de datos mediante Spring Data JPA, se crearon las interfaces de Repositorios para cada una de las entidades:

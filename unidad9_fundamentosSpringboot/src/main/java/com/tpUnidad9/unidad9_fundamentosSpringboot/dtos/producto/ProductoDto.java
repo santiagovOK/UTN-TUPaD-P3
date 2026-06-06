@@ -23,7 +23,7 @@ public record ProductoDto(
                 producto.getStock(),
                 producto.getImagen(),
                 producto.isDisponible(),
-                producto.getCategoria() != null ? CategoriaDto().toDto(producto.getCategoria()) : null
+                producto.getCategoria() != null ? CategoriaDto.toDto(producto.getCategoria()) : null
         );
     }
 }

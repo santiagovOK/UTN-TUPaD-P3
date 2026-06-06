@@ -1,17 +1,23 @@
 package com.tpUnidad9.unidad9_fundamentosSpringboot.dtos.usuario;
 
-/*
- *
- * @author Santiago Octavio Varela / @santiagovOK (GitHub)
- * <santiago.varela@tupad.utn.edu.ar>
- */
+import com.tpUnidad9.unidad9_fundamentosSpringboot.entities.Usuario;
 
 public record UsuarioDto(
+        Long id,
         String nombre,
         String apellido,
         String mail,
         String celular
 ) {
+    // Aquí se agrega el método toDto() usando los getters provistos por Lombok en la entidad Usuario.
+    // Además, se le sumó el campo "id" que va a ser importante para identificar el recurso en el frontend (si es que esto se reutiliza así posteriormente).
+    public static UsuarioDto toDto(Usuario usuario) {
+        return new UsuarioDto(
+                usuario.getId(),
+                usuario.getNombre(),
+                usuario.getApellido(),
+                usuario.getMail(),
+                usuario.getCelular()
+        );
+    }
 }
-
-// Gracias a esto, se oculta la información sensible (contraseña, rol) del usuario (punto 4. del TP Nº6). Además, al ser un record, se generan automáticamente los métodos equals, hashCode y toString, lo que facilita su uso en colecciones y depuración.
