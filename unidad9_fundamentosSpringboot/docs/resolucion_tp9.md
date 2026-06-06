@@ -48,3 +48,14 @@ Para cumplir con las "Conclusiones Esperadas" respecto al uso de estereotipos y 
 - `DetallePedidoRepository`
 
 Todas estas interfaces extienden de `JpaRepository<Entidad, Long>`, delegando a Spring la generación de los métodos CRUD y la ejecución de consultas a la base de datos H2. Adicionalmente, fueron decoradas explícitamente con la anotación `@Repository` para denotar su rol en la arquitectura y cumplir con las consignas del Trabajo Práctico.
+
+## 5. Creación de la capa de Servicios
+Continuando con la arquitectura en capas y para cumplir con la consigna de Inyección de Dependencias, se comenzó a implementar la lógica de negocio mediante clases anotadas con `@Service`.
+
+### 5.1. Servicio de Categorías
+Se definió la interfaz `CategoriaService` para establecer el contrato de operaciones interactuando puramente con DTOs (`CategoriaCreate`, `CategoriaDto`, `CategoriaEdit`), aislando así las Entidades del exterior.
+En su implementación, `CategoriaServiceImpl`, se inyectó el `CategoriaRepository` mediante constructor y se desarrollaron las siguientes lógicas:
+- **Guardado (`save`)**: Conversión del DTO de creación a Entidad usando su método `.toEntity()`, persistencia en base de datos y retorno de un `CategoriaDto`.
+- **Búsquedas (`findById` y `findAll`)**: Uso de `orElseThrow` para manejar entidades no encontradas de forma elegante, y uso de *Streams* de Java para mapear listas enteras de entidades a sus respectivos DTOs.
+- **Actualización (`update`)**: Se busca la entidad original, se le aplican los cambios parciales con el método `.applyTo()` del DTO de edición, y se vuelve a persistir.
+- **Baja Lógica (`deleteById`)**: En lugar de hacer un borrado físico, se aprovechó la propiedad `eliminado` heredada de la clase `Base` (migrada del trabajo práctico de JPA) para realizar un borrado con baja lógica, cambiando el estado de eliminado a `true` y conservando el historial en la base de datos.
