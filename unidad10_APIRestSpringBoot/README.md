@@ -1,4 +1,4 @@
-# Trabajo Práctico - Unidad 9 (Java - Fundamentos de Spring Boot )
+# Trabajo Práctico - Unidad 10 (Java - API Rest con Spring Boot )
 
 Cree un archivo Markdown para la resolución de cada una de las consignas (principalmente para guiarme yo y poder revisar los cambios unidad por unidad en el proyecto.). Pueden verlo aquí: [docs/resolucion.md](docs/resolucion_tp9.md)
 

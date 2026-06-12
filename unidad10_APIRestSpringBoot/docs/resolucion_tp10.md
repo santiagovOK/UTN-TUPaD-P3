@@ -20,3 +20,20 @@ Para cumplir con las consignas, específicamente la búsqueda de un usuario por 
 - **`UsuarioRepository`**: Se agregó la firma `Optional<Usuario> findByMail(String mail);` delegando a Spring Data JPA la creación automática de la consulta a la base de datos.
 - **`UsuarioService`**: Se definió el nuevo contrato `UsuarioDto findByMail(String mail);`.
 - **`UsuarioServiceImp`**: Se implementó el método utilizando `.orElseThrow()` para arrojar una excepción (posteriormente manejada) en caso de que no exista el usuario, y transformando la entidad encontrada a un `UsuarioDto` antes de ser devuelta.
+
+## 4. Desarrollo de la capa de Controladores (REST API)
+Para exponer nuestra lógica de negocio, se creó el paquete `controllers` y las siguientes clases anotadas con `@RestController` y `@RequestMapping`:
+- `CategoriaController` (`/api/categorias`)
+- `ProductoController` (`/api/productos`)
+- `PedidoController` (`/api/pedidos`)
+- `UsuarioController` (`/api/usuarios`)
+
+Todos incluyen métodos estándar (GET, POST, PUT, DELETE) y retornan estructuras `ResponseEntity<?>` con sus respectivos códigos de estado HTTP (`200 OK`, `201 CREATED`, `204 NO CONTENT`).
+En particular, para cumplir con las consignas, en `UsuarioController` se añadieron las sentencias `System.out.println` en los métodos de búsqueda (por ID y por el nuevo endpoint `/search?mail=...`) para garantizar que la información se imprima por consola al ser solicitada.
+
+## 5. Manejo Global de Excepciones (AdviceController)
+Para lograr una API robusta y evitar que las excepciones internas de Java rompan la respuesta JSON, se creó `AdviceController` decorado con `@RestControllerAdvice`.
+Este controlador intercepta globalmente:
+- `NullPointerException`: Utilizado por nuestros servicios cuando no encuentran un recurso (retorna `404 Not Found`).
+- `IllegalArgumentException`: Utilizado comúnmente para peticiones inválidas (retorna `400 Bad Request`).
+- `Exception`: Captura errores genéricos o imprevistos (retorna `500 Internal Server Error`).
