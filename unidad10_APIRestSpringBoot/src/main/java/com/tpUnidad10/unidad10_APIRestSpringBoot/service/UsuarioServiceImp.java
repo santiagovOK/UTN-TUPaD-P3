@@ -30,6 +30,12 @@ public class UsuarioServiceImp implements UsuarioService {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new NullPointerException("No se encontró el usuario con id: " + id));
         return UsuarioDto.toDto(usuario);
     }
+    // TP10 - Nuevo método para llamar al repositorio usando findByMail (similar al resto). La excepción ahora se va a empezar a capturar en la capa de controlador.
+    @Override
+    public UsuarioDto findByMail(String mail) {
+        Usuario usuario = usuarioRepository.findByMail(mail).orElseThrow(() -> new NullPointerException("No se encontró el usuario con mail: " + mail));
+        return UsuarioDto.toDto(usuario);
+    }
 
     @Override
     public List<UsuarioDto> findAll() {
