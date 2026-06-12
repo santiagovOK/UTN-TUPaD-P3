@@ -1,0 +1,24 @@
+package com.tpUnidad10.unidad10_APIRestSpringBoot.dtos.usuario;
+
+import com.tpUnidad10.unidad10_APIRestSpringBoot.entities.Usuario;
+import com.tpUnidad10.unidad10_APIRestSpringBoot.enums.Rol;
+
+public record UsuarioCreate(
+        String nombre,
+        String apellido,
+        String mail,
+        String celular,
+        String password,
+        Rol rol
+) {
+    public Usuario toEntity() {
+        return Usuario.builder()
+                .nombre(this.nombre)
+                .apellido(this.apellido)
+                .mail(this.mail)
+                .celular(this.celular)
+                .password(this.password)
+                .rol(this.rol)
+                .build();
+    }
+}
