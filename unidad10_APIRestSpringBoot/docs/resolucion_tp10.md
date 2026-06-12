@@ -37,3 +37,7 @@ Este controlador intercepta globalmente:
 - `NullPointerException`: Utilizado por nuestros servicios cuando no encuentran un recurso (retorna `404 Not Found`).
 - `IllegalArgumentException`: Utilizado comúnmente para peticiones inválidas (retorna `400 Bad Request`).
 - `Exception`: Captura errores genéricos o imprevistos (retorna `500 Internal Server Error`).
+
+---
+
+**Hasta aquí realicé el TP10, ya que lo use para ir un poco más paso a paso con la lógica en la capa de control, dado que usaré una estructura similar en el TPI**
